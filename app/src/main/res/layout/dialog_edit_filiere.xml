@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Filière Name -->
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editNom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom de la Filière"
+        android:inputType="text"/>
+
+    <!-- EditText for Filière Description -->
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description de la Filière"
+        android:inputType="text"/>
+
+</LinearLayout>

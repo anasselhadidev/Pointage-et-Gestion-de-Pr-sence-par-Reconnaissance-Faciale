@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="8dp"
+    tools:context=".activities.ListeOffresActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Offer image (optional, you can add an image from the offer or a default image) -->
+        <ImageView
+            android:id="@+id/offre_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/house_icon"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Offer title -->
+        <TextView
+            android:id="@+id/offre_titre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer Title"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"/>
+
+        <!-- Offer description (can truncate long descriptions) -->
+        <TextView
+            android:id="@+id/offre_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Short description of the offer..."
+            android:textColor="@android:color/darker_gray"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Button to view more details or modify -->
+        <Button
+            android:id="@+id/offre_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Offer"
+            android:layout_gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

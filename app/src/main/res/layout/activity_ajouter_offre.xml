@@ -1,0 +1,65 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <EditText
+        android:id="@+id/offre_titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Titre de l'offre"
+        android:inputType="text"/>
+
+    <!-- Description -->
+    <EditText
+        android:id="@+id/offre_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description de l'offre"
+        android:inputType="text"/>
+
+    <!-- Surface Area -->
+    <EditText
+        android:id="@+id/offre_superficie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Superficie (m²)"
+        android:inputType="numberDecimal"/>
+
+    <!-- Rooms -->
+    <EditText
+        android:id="@+id/offre_pieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de pièces"
+        android:inputType="number"/>
+
+    <!-- Bathrooms -->
+    <EditText
+        android:id="@+id/offre_sdb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de salles de bain"
+        android:inputType="number"/>
+
+    <!-- Rent -->
+    <EditText
+        android:id="@+id/offre_loyer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Loyer (€)"
+        android:inputType="numberDecimal"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btn_save_offre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter l'offre"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+  <!-- Title and Description -->
+  <TextView
+      android:id="@+id/titre_text_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Offer Title"
+      android:textSize="18sp" />
+
+  <TextView
+      android:id="@+id/description_text_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Offer Description"
+      android:textSize="16sp" />
+
+  <!-- Label for Superficie -->
+  <TextView
+      android:id="@+id/superficie_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Superficie:"
+      android:textSize="16sp" />
+
+  <EditText
+      android:id="@+id/superficie_edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Superficie"
+      android:inputType="numberDecimal" />
+
+  <!-- Label for Pieces -->
+  <TextView
+      android:id="@+id/pieces_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Pieces:"
+      android:textSize="16sp" />
+
+  <EditText
+      android:id="@+id/pieces_edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Pieces"
+      android:inputType="number" />
+
+  <!-- Label for SDB -->
+  <TextView
+      android:id="@+id/sdb_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="SDB:"
+      android:textSize="16sp" />
+
+  <EditText
+      android:id="@+id/sdb_edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="SDB"
+      android:inputType="number" />
+
+  <!-- Label for Loyer -->
+  <TextView
+      android:id="@+id/loyer_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Loyer:"
+      android:textSize="16sp" />
+
+  <EditText
+      android:id="@+id/loyer_edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Loyer"
+      android:inputType="numberDecimal" />
+
+  <!-- Save Button -->
+  <Button
+      android:id="@+id/save_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Save Changes" />
+
+  <Button
+      android:id="@+id/remove_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Remove Offer" />
+
+</LinearLayout>

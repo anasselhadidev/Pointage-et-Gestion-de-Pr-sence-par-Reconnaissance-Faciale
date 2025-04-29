@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- TextView to display the Filiere Name -->
+    <TextView
+        android:id="@+id/textViewNomFiliere"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nom de la Filière"
+        android:textSize="18sp"
+        android:paddingEnd="8dp" />
+
+    <!-- TextView to display the Filiere Description -->
+    <TextView
+        android:id="@+id/textViewDescriptionFiliere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description de la Filière"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <!-- Button to delete the Filière -->
+    <Button
+        android:id="@+id/btnDeleteFiliere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Supprimer"
+        android:layout_gravity="end"
+        android:textColor="#FF0000"/>
+
+</LinearLayout>

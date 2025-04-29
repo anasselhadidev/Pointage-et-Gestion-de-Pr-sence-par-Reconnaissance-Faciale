@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Offer details -->
+    <TextView
+        android:id="@+id/titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titre"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/loyer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loyer"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/superficie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Superficie"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/pieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pièces"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/sdb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salle de bains"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/etDemandeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Décrivez votre demande ici..."
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btnFaireDemande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faire une demande"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center" />
+    <!-- Button to submit comment -->
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Écrivez un commentaire"
+        android:inputType="textMultiLine"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btnSubmitComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soumettre le commentaire"
+        android:layout_gravity="center" />
+
+    <!-- Comment Section -->
+    <TextView
+        android:id="@+id/tvCommentsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Commentaires"
+        android:textSize="18sp"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"/>
+
+    <!-- RecyclerView to display comments -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewComments"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- EditText for new comment -->
+
+
+
+</LinearLayout>
