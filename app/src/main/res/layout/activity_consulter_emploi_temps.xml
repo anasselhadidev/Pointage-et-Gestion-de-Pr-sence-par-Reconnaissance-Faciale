@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TableLayout
+        android:id="@+id/tableSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:shrinkColumns="*"
+        android:background="@drawable/table_border">
+
+        <!-- Header -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EEEEEE"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Jour"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="8 h – 12 h"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="14 h – 18 h"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="4dp"/>
+
+        </TableRow>
+
+        <!-- Les lignes de planning seront ajoutées dynamiquement depuis l’activité -->
+
+    </TableLayout>
+</ScrollView>

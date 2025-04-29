@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textDay"
+        android:padding="4dp"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/textMorning"
+        android:padding="4dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textEvening"
+        android:padding="4dp"
+        android:gravity="center"/>
+
+</TableRow>
