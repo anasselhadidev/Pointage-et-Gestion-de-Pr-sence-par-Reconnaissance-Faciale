@@ -16,6 +16,9 @@
             android:name=".ConsulterEmploiActivity"
             android:exported="false" />
         <activity
+            android:name=".TeacherHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".GererEmploiActivity"
             android:exported="false" />
         <activity
