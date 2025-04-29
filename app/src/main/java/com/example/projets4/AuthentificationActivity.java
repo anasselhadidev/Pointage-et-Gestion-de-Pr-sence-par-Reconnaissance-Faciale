@@ -14,58 +14,24 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.projets4.R;
-import com.example.projets4.dataAccess.PasswordEncryption;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class AuthentificationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout layout1;
-    LinearLayout layout2;
-    LinearLayout layout3;
-    Button bttauth;
-    Button bttacc;
-    Button bttconfAcc;
-    Button bttAnnuler;
-    Button bttDeconnecxion;
-    Button bttOffres;
-    Button bttDemandes;
-    Button bttProfil;
-    TextView userinfo;
-    EditText login;
-    EditText password;
-    EditText email;
-    EditText nom;
-    EditText prenom;
-    EditText pays;
-    EditText adresse;
-    EditText phone;
-    EditText ville;
-    EditText passwordreg;
+    LinearLayout layout1, layout2;
+    Button bttauth, bttacc, bttconfAcc, bttAnnuler;
+    EditText login, password, email, nom, prenom, pays, phone, ville, passwordreg;
+
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
-    String nomUser;
-    String prenomUser;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,20 +57,18 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
         bttconfAcc = findViewById(R.id.confirmeButton);
         bttAnnuler = findViewById(R.id.annulerButton);
 
+        login = findViewById(R.id.loginEditText);
+        password = findViewById(R.id.passwordEditText);
 
         bttauth.setOnClickListener(this);
         bttacc.setOnClickListener(this);
         bttconfAcc.setOnClickListener(this);
         bttAnnuler.setOnClickListener(this);
-
-        login = findViewById(R.id.loginEditText);
-        password = findViewById(R.id.passwordEditText);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -125,49 +89,41 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
     }
 
     private void SignIn() {
-        String pass = PasswordEncryption.hash(password.getText().toString());
-        mAuth.signInWithEmailAndPassword(login.getText().toString(), pass)
+        mAuth.signInWithEmailAndPassword(login.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Check if the user is a client or agent based on their email
                             checkUserType(user.getEmail());
                         }
                         updateUI(user);
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         updateUI(null);
                     }
                 });
     }
 
     private void signUp() {
-        // Get the selected user type (Agent or Client)
         RadioGroup userTypeRadioGroup = findViewById(R.id.typeuserRadioGroup);
         int selectedId = userTypeRadioGroup.getCheckedRadioButtonId();
-        final String userType; // Make userType final
+        final String userType;
 
         if (selectedId == R.id.etudiantRadio) {
-            userType = "etudiant"; // The user is registering as an agent
+            userType = "etudiant";
         } else if (selectedId == R.id.professeurRadio) {
-            userType = "professeur"; // The user is registering as a client
+            userType = "professeur";
         } else {
-            // If no radio button is selected, show an error message
-            Toast.makeText(AuthentificationActivity.this, "Please select a user type (Agent or Client)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select a user type (Etudiant or Professeur)", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Encrypt the password
-        String encryptedPassword = PasswordEncryption.hash(passwordreg.getText().toString());
-
-        // Create user with email and password
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), encryptedPassword)
+        mAuth.createUserWithEmailAndPassword(email.getText().toString(), passwordreg.getText().toString())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Create user data to be saved to Firestore
                             Map<String, Object> userData = new HashMap<>();
                             userData.put("nom", nom.getText().toString());
                             userData.put("prenom", prenom.getText().toString());
@@ -176,86 +132,71 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
                             userData.put("phone", phone.getText().toString());
                             userData.put("email", email.getText().toString());
 
-                            // Save user data to Firestore in the corresponding collection (agents/clients)
-                            db.collection(userType + "s") // 'agents' or 'clients'
-                                    .document(user.getEmail()) // Use the email as document ID
+                            db.collection(userType + "s")
+                                    .document(user.getEmail())
                                     .set(userData)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            // After successfully saving the user, navigate to the appropriate dashboard
-                                            if (userType.equals("etudiants")) {
-                                               // navigateToAgentDashboard();
+                                            if (userType.equals("etudiant")) {
+                                              //  navigateToEtudiantDashboard();
                                             } else {
-                                               // navigateToClientDashboard();
+                                                navigateToProfesseurDashboard();
                                             }
                                         } else {
                                             Log.w(TAG, "Error saving user data", task1.getException());
-                                            Toast.makeText(AuthentificationActivity.this, "Error saving user data", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(this, "Error saving user data", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
                     } else {
                         Log.w(TAG, "signUpWithEmail:failure", task.getException());
+                        Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show();
                         updateUI(null);
                     }
                 });
     }
 
-
     private void checkUserType(String email) {
-        // First, check if the user exists in the "agents" collection
-      /*  db.collection("agents").document(email)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult().exists()) {
-                        // User is an agent
-                        navigateToAgentDashboard();
+        db.collection("etudiants").document(email).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+              // navigateToEtudiantDashboard();
+            } else {
+                db.collection("professeurs").document(email).get().addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful() && task1.getResult().exists()) {
+                        navigateToProfesseurDashboard();
                     } else {
-                        // If not an agent, check if they are a client
-                        db.collection("clients").document(email)
-                                .get()
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful() && task1.getResult().exists()) {
-                                        // User is a client
-                                        navigateToClientDashboard();
-                                    } else {
-                                        System.out.println( "No such user found in clients \n");
-                                    }
-                                }); */
-                        db.collection("admins").document(email)
-                                .get()
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful() && task1.getResult().exists()) {
-                                        // User is a client
-                                        navigateToAdminDashboard();
-                                    } else {
-                                        Toast.makeText(AuthentificationActivity.this, "No such user found", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        db.collection("admins").document(email).get().addOnCompleteListener(task2 -> {
+                            if (task2.isSuccessful() && task2.getResult().exists()) {
+                                navigateToAdminDashboard();
+                            } else {
+                                Toast.makeText(this, "No such user found", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
+                });
+            }
+        });
+    }
 
     private void navigateToAdminDashboard() {
-        // Redirect to Agent's specific activity
-        Intent agentIntent = new Intent(this, AdminHomeActivity.class);
-        startActivity(agentIntent);
-        finish(); // Ensure the login screen is not accessible after login
+        Intent intent = new Intent(this, AdminHomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    /*   private void navigateToAgentDashboard() {
-        // Redirect to Agent's specific activity
-        Intent agentIntent = new Intent(this, AgentHomeActivity.class);
-        startActivity(agentIntent);
-        finish(); // Ensure the login screen is not accessible after login
+  /*  private void navigateToEtudiantDashboard() {
+        Intent intent = new Intent(this, EtudiantHomeActivity.class);
+        startActivity(intent);
+        finish();
+    }*/
+
+    private void navigateToProfesseurDashboard() {
+        Intent intent = new Intent(this, TeacherHomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    private void navigateToClientDashboard() {
-        // Redirect to Client's specific activity
-        Intent clientIntent = new Intent(this, ClientHomeActivity.class);
-        startActivity(clientIntent);
-        finish(); // Ensure the login screen is not accessible after login
-    } */
-
-    void updateUI(FirebaseUser currentUser) {
+    private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
             layout1.setVisibility(View.VISIBLE);
             layout2.setVisibility(View.GONE);
