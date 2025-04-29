@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projets4.R;
-import com.example.projets4.model.Course;
+import com.example.projets4.model.Matiere;
 
 import java.util.List;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseViewHolder> {
 
-    private List<Course> courseList;
+    private List<Matiere> courseList;
 
-    public CoursesAdapter(List<Course> courseList) {
+    public CoursesAdapter(List<Matiere> courseList) {
         this.courseList = courseList;
     }
 
@@ -32,7 +32,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = courseList.get(position);
+        Matiere course = courseList.get(position);
         holder.title.setText(course.getTitle());
         holder.schedule.setText(course.getSchedule());
         holder.room.setText(course.getRoom());
