@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="motifs_absence">
+        <item>Maladie</item>
+        <item>Rendez-vous médical</item>
+        <item>Problème familial</item>
+        <item>Problème de transport</item>
+        <item>Événement sportif</item>
+        <item>Rendez-vous administratif</item>
+        <item>Autre (préciser dans commentaire)</item>
+    </string-array>
+</resources>

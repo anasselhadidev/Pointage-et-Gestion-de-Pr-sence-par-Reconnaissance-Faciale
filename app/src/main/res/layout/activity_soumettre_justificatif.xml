@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SoumettreJustificatifActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Soumettre un justificatif" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Section Date d'absence -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date d'absence"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvDateAbsence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="01/05/2025"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:background="#F5F5F5" />
+
+                <Button
+                    android:id="@+id/btnSelectDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choisir date"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Section Motif -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Motif de l'absence"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerMotif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/motifs_absence" />
+
+            <!-- Section Commentaire -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Commentaire (optionnel)"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etCommentaire"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Détails supplémentaires..."
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:background="#F5F5F5"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Section Document -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Document justificatif"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnSelectDocument"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sélectionner un document"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvDocumentSelected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aucun document sélectionné"
+                android:textStyle="italic"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Bouton de soumission -->
+            <Button
+                android:id="@+id/btnSoumettre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soumettre le justificatif"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@drawable/button_background"
+                android:textColor="#FFFFFF" />
+
+            <!-- Instructions -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Les justificatifs acceptés sont: certificats médicaux, convocations officielles, etc."
+                android:textSize="14sp"
+                android:textStyle="italic"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

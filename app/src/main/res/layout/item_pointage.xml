@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/tvStatut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Présent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvCours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mathématiques"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2025-04-30 08:15:23"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvTypePointage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Entrée"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvTerminal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terminal: Salle 201"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvProfesseur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enseignant: Mme Benali"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:id="@+id/layoutOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnContester"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contester"
+                android:textSize="12sp"
+                android:backgroundTint="#F44336"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnJustifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Justifier"
+                android:textSize="12sp"
+                android:backgroundTint="#2196F3"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
