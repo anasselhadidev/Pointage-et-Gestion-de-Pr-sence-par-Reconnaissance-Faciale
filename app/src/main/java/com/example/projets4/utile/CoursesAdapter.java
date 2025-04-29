@@ -37,8 +37,13 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
         holder.schedule.setText(course.getSchedule());
         holder.room.setText(course.getRoom());
         holder.progress.setProgress(course.getProgress());
-        holder.progressText.setText(course.getProgress() + "%");
-        holder.status.setText(course.getStatus());
+        if(course.getStatus()=="À venir"){
+            holder.progressText.setText("0 %");
+            holder.status.setText(course.getStatus());
+        }else {
+            holder.progressText.setText(course.getProgress() + "%");
+            holder.status.setText(course.getStatus());
+        }
     }
 
     @Override

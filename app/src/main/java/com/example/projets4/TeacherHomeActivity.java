@@ -32,7 +32,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
         // Add static courses
         courseList.add(new Course("Mathématiques Avancées", "📅 Mardi 29 Avril, 11:00 - 12:30", "📍 Salle 203", 75, "Terminé"));
         courseList.add(new Course("Physique Fondamentale", "📅 Mercredi 30 Avril, 09:00 - 10:30", "📍 Salle 101", 60, "En cours"));
-        courseList.add(new Course("Chimie Organique", "📅 Jeudi 1 Mai, 14:00 - 15:30", "📍 Salle 304", 90, "À venir"));
+        courseList.add(new Course("Chimie Organique", "📅 Jeudi 1 Mai, 14:00 - 15:30", "📍 Salle 304", 0, "À venir"));
 
         // Set adapter
         adapter = new CoursesAdapter(courseList);
