@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textViewNomMatiere"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:textSize="16sp" />
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/textViewMatiereNom"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+
+    <ImageButton
+        android:id="@+id/btnEditMatiere"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_edit"
+        android:contentDescription="Modifier"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+</LinearLayout>

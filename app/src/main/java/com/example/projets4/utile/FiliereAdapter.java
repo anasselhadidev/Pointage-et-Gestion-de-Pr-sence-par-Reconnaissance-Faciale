@@ -1,13 +1,14 @@
 package com.example.projets4.utile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projets4.R;
 import com.example.projets4.model.Filiere;
 import com.example.projets4.model.Matiere;
-import com.example.projets4.utile.MatiereAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -45,85 +45,110 @@ public class FiliereAdapter extends RecyclerView.Adapter<FiliereAdapter.FiliereV
         holder.nom.setText(f.getNom());
         holder.desc.setText(f.getDescription());
 
-        // load nested matieres
+        // On (re)charge les matières pour cette filière
         loadMatieres(f, holder);
 
-        // long-press: open multi-add dialog
-        holder.itemView.setOnLongClickListener(v -> {
-            View dlg = LayoutInflater.from(v.getContext())
-                    .inflate(R.layout.dialog_add_matieres, null);
-            AlertDialog.Builder b = new AlertDialog.Builder(v.getContext())
-                    .setView(dlg)
-                    .setTitle("Ajouter des Matières pour " + f.getNom())
-                    .setNegativeButton("Annuler", null);
-
-            LinearLayout container = dlg.findViewById(R.id.containerMatiereFields);
-            dlg.findViewById(R.id.btnAddField)
-                    .setOnClickListener(x -> {
-                        EditText et = new EditText(v.getContext());
-                        et.setHint("Nom Matière");
-                        container.addView(et);
-                    });
-            // add initial
-            container.addView(new androidx.appcompat.widget.AppCompatEditText(v.getContext()) {{ setHint("Nom Matière"); }});
-
-            b.setPositiveButton("Valider", (d, w) -> {
-                List<String> names = new ArrayList<>();
-                for (int i = 0; i < container.getChildCount(); i++) {
-                    View c = container.getChildAt(i);
-                    if (c instanceof EditText) {
-                        String s = ((EditText) c).getText().toString().trim();
-                        if (!s.isEmpty()) names.add(s);
-                    }
-                }
-                for (String nm : names) {
-                    db.collection("filieres")
-                            .document(f.getId())
-                            .collection("matieres")
-                            .add(new Matiere(nm));
-                }
-                // refresh nested list
-                refreshMatiereList(f);
-            });
-            b.show();
-            return true;
+        // ... votre code de suppression / édition de filière ici ...
+        // 2) Bouton Supprimer
+        holder.btnDelete.setOnClickListener(v -> {
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Supprimer la filière")
+                    .setMessage("Voulez-vous vraiment supprimer \"" + f.getNom() + "\" ?")
+                    .setPositiveButton("Oui", (d, w) -> {
+                        db.collection("filieres")
+                                .document(f.getId())
+                                .delete()
+                                .addOnSuccessListener(unused -> {
+                                    int posNow = holder.getAdapterPosition();
+                                    filieres.remove(posNow);
+                                    notifyItemRemoved(posNow);
+                                });
+                    })
+                    .setNegativeButton("Non", null)
+                    .show();
         });
     }
 
     @Override
-    public int getItemCount() { return filieres.size(); }
+    public int getItemCount() {
+        return filieres.size();
+    }
 
-    // helper to (re)load matieres under a filiere
+    /** Rafraîchit la carte de la filière pour recharger onBind */
     public void refreshMatiereList(Filiere f) {
-        // find its adapter position
         int pos = filieres.indexOf(f);
         if (pos >= 0) notifyItemChanged(pos);
     }
 
-    private void loadMatieres(Filiere f, FiliereViewHolder h) {
+
+
+    /** Charge les matières et remplace l’adapter vide */
+    private void loadMatieres(Filiere filiere, FiliereViewHolder h) {
         db.collection("filieres")
-                .document(f.getId())
+                .document(filiere.getId())
                 .collection("matieres")
                 .get()
                 .addOnSuccessListener(q -> {
                     List<Matiere> list = new ArrayList<>();
-                    for (var ds : q) list.add(ds.toObject(Matiere.class));
-                    MatiereAdapter ma = new MatiereAdapter(list);
-                    h.recyclerMatieres.setLayoutManager(new LinearLayoutManager(h.itemView.getContext()));
+                    for (var ds : q) {
+                        Matiere m = ds.toObject(Matiere.class);
+                        m.setId(ds.getId());
+                        list.add(m);
+                    }
+                    // Remplacement de l’adapter par celui-ci
+                    MatiereAdapter ma = new MatiereAdapter(list, m -> {
+                        showEditMatiereDialog(h.itemView.getContext(), filiere, m);
+                    });
                     h.recyclerMatieres.setAdapter(ma);
                 });
     }
 
+    /** Affiche la boîte de dialogue d’édition d’une matière */
+    private void showEditMatiereDialog(Context ctx, Filiere filiere, Matiere m) {
+        AlertDialog.Builder b = new AlertDialog.Builder(ctx);
+        View v = LayoutInflater.from(ctx)
+                .inflate(R.layout.dialog_add_matiere, null);
+        EditText et = v.findViewById(R.id.editMatiereNom);
+        et.setText(m.getNom());
+
+        b.setView(v)
+                .setTitle("Modifier Matière")
+                .setPositiveButton("Enregistrer", (d, w) -> {
+                    String nouveauNom = et.getText().toString().trim();
+                    if (nouveauNom.isEmpty()) return;
+                    db.collection("filieres")
+                            .document(filiere.getId())
+                            .collection("matieres")
+                            .document(m.getId())
+                            .update("nom", nouveauNom)
+                            .addOnSuccessListener(u -> refreshMatiereList(filiere));
+                })
+                .setNegativeButton("Annuler", null)
+                .show();
+    }
+
     static class FiliereViewHolder extends RecyclerView.ViewHolder {
         TextView nom, desc;
-        Button btnDelete;
         RecyclerView recyclerMatieres;
+        Button btnDelete; // si vous avez un bouton supprimer
+
         FiliereViewHolder(View v) {
             super(v);
             nom = v.findViewById(R.id.textViewNomFiliere);
             desc = v.findViewById(R.id.textViewDescriptionFiliere);
-            btnDelete = v.findViewById(R.id.btnDeleteFiliere);
             recyclerMatieres = v.findViewById(R.id.recyclerMatieres);
+
+            // ● ATTACHE IMMÉDIATEMENT un layoutManager + adapter vide :
+            recyclerMatieres.setLayoutManager(
+                    new LinearLayoutManager(v.getContext()));
+            // adapter vide avec callback no-op
+            MatiereAdapter empty = new MatiereAdapter(
+                    new ArrayList<>(),
+                    m -> { /* rien */ }
+            );
+            recyclerMatieres.setAdapter(empty);
+
+            btnDelete = v.findViewById(R.id.btnDeleteFiliere);
         }
     }
 }
