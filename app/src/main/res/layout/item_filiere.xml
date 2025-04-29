@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="12dp">
 
-    <!-- TextView to display the Filiere Name -->
     <TextView
         android:id="@+id/textViewNomFiliere"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Nom de la Filière"
         android:textSize="18sp"
-        android:paddingEnd="8dp" />
+        android:textStyle="bold" />
 
-    <!-- TextView to display the Filiere Description -->
     <TextView
         android:id="@+id/textViewDescriptionFiliere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description de la Filière"
-        android:textSize="14sp"
-        android:visibility="gone" />
+        android:textSize="14sp" />
 
-    <!-- Button to delete the Filière -->
     <Button
         android:id="@+id/btnDeleteFiliere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Supprimer"
-        android:layout_gravity="end"
-        android:textColor="#FF0000"/>
+        android:text="Supprimer" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMatieres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false" />
 </LinearLayout>
