@@ -18,6 +18,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     private Button manageUsersButton;
     private Button viewComplaintsButton;
     private Button logoutButton;
+    private Button btnAdminDashboard; // Nouveau bouton pour le tableau de bord administrateur
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         manageUsersButton    = findViewById(R.id.manageUsersButton);
         viewComplaintsButton = findViewById(R.id.viewComplaintsButton);
         logoutButton         = findViewById(R.id.logoutButton);
+        btnAdminDashboard    = findViewById(R.id.btnAdminDashboard); // Initialisation du nouveau bouton
 
         adminWelcomeText.setText("Bienvenue, Administrateur");
 
@@ -53,6 +55,11 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         viewComplaintsButton.setOnClickListener(v ->
                 startActivity(new Intent(this, ListeReclamationsActivity.class))
+        );
+
+        // Nouveau bouton pour accéder au tableau de bord administrateur complet
+        btnAdminDashboard.setOnClickListener(v ->
+                startActivity(new Intent(this, AdminDashboardActivity.class))
         );
 
         logoutButton.setOnClickListener(v -> {

@@ -13,12 +13,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.ProgressDialog;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -115,12 +121,25 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
         } else if (selectedId == R.id.professeurRadio) {
             userType = "professeur";
         } else {
-            Toast.makeText(this, "Please select a user type (Etudiant or Professeur)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Veuillez sélectionner un type d'utilisateur (Étudiant ou Professeur)", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Vérifier si les champs sont vides
+        if (email.getText().toString().isEmpty() || passwordreg.getText().toString().isEmpty() ||
+                nom.getText().toString().isEmpty() || prenom.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Veuillez remplir tous les champs obligatoires", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Afficher un indicateur de chargement
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Création du compte en cours...");
+        progressDialog.show();
+
         mAuth.createUserWithEmailAndPassword(email.getText().toString(), passwordreg.getText().toString())
                 .addOnCompleteListener(this, task -> {
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
@@ -144,13 +163,27 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
                                             }
                                         } else {
                                             Log.w(TAG, "Error saving user data", task1.getException());
-                                            Toast.makeText(this, "Error saving user data", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(this, "Erreur lors de l'enregistrement des données utilisateur", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
                     } else {
-                        Log.w(TAG, "signUpWithEmail:failure", task.getException());
-                        Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show();
+                        Exception exception = task.getException();
+                        Log.w(TAG, "signUpWithEmail:failure", exception);
+
+                        String errorMessage = "Échec de l'inscription";
+
+                        if (exception instanceof FirebaseNetworkException) {
+                            errorMessage = "Erreur de connexion réseau. Vérifiez votre connexion Internet et réessayez.";
+                        } else if (exception instanceof FirebaseAuthUserCollisionException) {
+                            errorMessage = "Cet email est déjà utilisé par un autre compte.";
+                        } else if (exception instanceof FirebaseAuthWeakPasswordException) {
+                            errorMessage = "Le mot de passe est trop faible. Utilisez au moins 6 caractères.";
+                        } else if (exception instanceof FirebaseAuthInvalidCredentialsException) {
+                            errorMessage = "L'adresse email n'est pas valide.";
+                        }
+
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
                         updateUI(null);
                     }
                 });
@@ -167,7 +200,16 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
                     } else {
                         db.collection("admins").document(email).get().addOnCompleteListener(task2 -> {
                             if (task2.isSuccessful() && task2.getResult().exists()) {
-                                navigateToAdminDashboard();
+                                // Vérifier si l'administrateur a des permissions avancées
+                                DocumentSnapshot document = task2.getResult();
+
+                                // Si le document admin contient des permissions avancées, rediriger vers le nouveau tableau de bord
+                                if (document.contains("permissions") && document.get("permissions") != null) {
+                                    navigateToNewAdminDashboard();
+                                } else {
+                                    // Sinon, utiliser l'ancien tableau de bord
+                                    navigateToAdminDashboard();
+                                }
                             } else {
                                 Toast.makeText(this, "No such user found", Toast.LENGTH_SHORT).show();
                             }
@@ -179,7 +221,14 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
     }
 
     private void navigateToAdminDashboard() {
-        Intent intent = new Intent(this, AdminHomeActivity.class);
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // Méthode pour naviguer vers le nouveau tableau de bord admin
+    private void navigateToNewAdminDashboard() {
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
         startActivity(intent);
         finish();
     }

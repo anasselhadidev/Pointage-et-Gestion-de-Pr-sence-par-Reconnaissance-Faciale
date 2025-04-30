@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="terminal_types">
+        <item>Point d'accès IoT</item>
+        <item>Borne NFC</item>
+        <item>Tablette fixe</item>
+        <item>Terminal biométrique</item>
+        <item>Terminal multi-capteurs</item>
+    </string-array>
+</resources>
