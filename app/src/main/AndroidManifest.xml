@@ -4,18 +4,31 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:theme="@style/Theme.Projets4"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="benkirane"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Location"
         tools:targetApi="31">
-        <!-- Nouvelles activités pour étudiant -->
+        <activity
+            android:name=".JustificationManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AttendanceReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SessionManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherDashboardActivity"
+            android:exported="false" /> <!-- Nouvelles activités pour étudiant -->
         <activity
             android:name=".EtudiantHomeActivity"
             android:exported="false" />
@@ -30,27 +43,25 @@
             android:exported="false" />
         <activity
             android:name=".ProfileEtudiantActivity"
-            android:exported="false" />
-
-        <!-- Activités existantes -->
+            android:exported="false" /> <!-- Activités existantes -->
         <activity
             android:name=".ConsulterEmploiActivity"
             android:exported="false" />
         <activity
             android:name=".TeacherHomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".GererEmploiActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".GererEmploiActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".GererMatiereActivity"
             android:exported="false" />
         <activity
             android:name=".GererFiliereActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".ListeReclamationsActivity"
             android:exported="false" />
@@ -71,6 +82,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
