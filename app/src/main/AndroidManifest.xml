@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Location"
         tools:targetApi="31">
-        <!-- Nouvelles activités pour étudiant -->
+        <activity
+            android:name=".JustificationManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AttendanceReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SessionManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherDashboardActivity"
+            android:exported="false" /> <!-- Nouvelles activités pour étudiant -->
         <activity
             android:name=".EtudiantHomeActivity"
             android:exported="false" />
@@ -30,9 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".ProfileEtudiantActivity"
-            android:exported="false" />
-
-        <!-- Activités existantes -->
+            android:exported="false" /> <!-- Activités existantes -->
         <activity
             android:name=".ConsulterEmploiActivity"
             android:exported="false" />
@@ -71,6 +82,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
