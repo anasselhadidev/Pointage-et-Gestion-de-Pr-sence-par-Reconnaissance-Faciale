@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -199,7 +200,16 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
                     } else {
                         db.collection("admins").document(email).get().addOnCompleteListener(task2 -> {
                             if (task2.isSuccessful() && task2.getResult().exists()) {
-                                navigateToAdminDashboard();
+                                // Vérifier si l'administrateur a des permissions avancées
+                                DocumentSnapshot document = task2.getResult();
+
+                                // Si le document admin contient des permissions avancées, rediriger vers le nouveau tableau de bord
+                                if (document.contains("permissions") && document.get("permissions") != null) {
+                                    navigateToNewAdminDashboard();
+                                } else {
+                                    // Sinon, utiliser l'ancien tableau de bord
+                                    navigateToAdminDashboard();
+                                }
                             } else {
                                 Toast.makeText(this, "No such user found", Toast.LENGTH_SHORT).show();
                             }
@@ -211,7 +221,14 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
     }
 
     private void navigateToAdminDashboard() {
-        Intent intent = new Intent(this, AdminHomeActivity.class);
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // Méthode pour naviguer vers le nouveau tableau de bord admin
+    private void navigateToNewAdminDashboard() {
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
         startActivity(intent);
         finish();
     }

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SystemConfigActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Configuration Système" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Règles de présence -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Règles de présence"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Seuil de retard -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seuil de retard (minutes)"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <SeekBar
+                                android:id="@+id/seekBarRetard"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:max="30"
+                                android:progress="15" />
+
+                            <TextView
+                                android:id="@+id/tvRetardValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="15 min"
+                                android:textSize="16sp"
+                                android:layout_marginStart="8dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Absence automatique -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Absence automatique après (minutes)"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <SeekBar
+                                android:id="@+id/seekBarAbsence"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:max="60"
+                                android:progress="30" />
+
+                            <TextView
+                                android:id="@+id/tvAbsenceValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="30 min"
+                                android:textSize="16sp"
+                                android:layout_marginStart="8dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Options supplémentaires -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/checkboxEnforceDouble"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Exiger double pointage (entrée/sortie)"
+                            android:checked="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkboxAllowJustification"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Autoriser les justificatifs rétroactifs"
+                            android:checked="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkboxAutoNotify"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Notification automatique des absences"
+                            android:checked="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Paramètres de notification -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Paramètres de notification"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Types de notifications -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Activer les notifications pour :"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifyStudents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Étudiants"
+                        android:checked="true" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifyTeachers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Enseignants"
+                        android:checked="true" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifyAdmins"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Administrateurs"
+                        android:checked="true" />
+
+                    <!-- Canaux de notification -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Canaux de notification :"
+                        android:textSize="16sp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifyApp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications dans l'application"
+                        android:checked="true" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifyEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Emails"
+                        android:checked="true" />
+
+                    <CheckBox
+                        android:id="@+id/checkboxNotifySMS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SMS"
+                        android:checked="false" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Paramètres de sécurité -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Paramètres de sécurité"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Politique de mot de passe -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Politique de mot de passe :"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerPasswordPolicy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Durée de session -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Durée maximale de session (minutes) :"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <SeekBar
+                            android:id="@+id/seekBarSessionDuration"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:max="120"
+                            android:progress="60" />
+
+                        <TextView
+                            android:id="@+id/tvSessionDurationValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="60 min"
+                            android:textSize="16sp"
+                            android:layout_marginStart="8dp" />
+                    </LinearLayout>
+
+                    <!-- Double authentification -->
+                    <CheckBox
+                        android:id="@+id/checkboxTwoFactor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Exiger l'authentification à deux facteurs pour les administrateurs"
+                        android:checked="true" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Sauvegarde et maintenance -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sauvegarde et maintenance"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Sauvegarde automatique -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sauvegarde automatique :"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerBackupFrequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Derniére sauvegarde -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dernière sauvegarde :"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvLastBackup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30/04/2025 02:15"
+                            android:textSize="16sp"
+                            android:layout_marginStart="8dp" />
+                    </LinearLayout>
+
+                    <!-- Actions de maintenance -->
+                    <Button
+                        android:id="@+id/btnBackupNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Effectuer une sauvegarde maintenant"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#3F51B5"
+                        android:layout_marginBottom="8dp" />
+
+                    <Button
+                        android:id="@+id/btnCleanDatabase"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nettoyer la base de données"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#FF9800"
+                        android:layout_marginBottom="8dp" />
+
+                    <Button
+                        android:id="@+id/btnRestoreBackup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Restaurer une sauvegarde"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#F44336" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Bouton Enregistrer -->
+            <Button
+                android:id="@+id/btnSaveConfig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enregistrer les paramètres"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="12dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Détails du terminal"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvTerminalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nom: Terminal A101"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvTerminalLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Emplacement: Bâtiment A, 1er étage"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvTerminalType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type: Point d'accès IoT"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvTerminalStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Statut: En ligne"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvBatteryLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Niveau de batterie: 85%"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvFirmwareVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version du firmware: 1.0.0"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvLastSeen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dernière activité: il y a 10 minutes"
+        android:textSize="16sp" />
+
+</LinearLayout>
+

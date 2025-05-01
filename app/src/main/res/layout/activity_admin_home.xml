@@ -32,6 +32,18 @@
             android:textSize="26sp"
             android:textStyle="bold" />
 
+        <!-- Nouveau bouton pour le tableau de bord administrateur complet -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAdminDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:elevation="8dp"
+            android:text="Tableau de bord administrateur"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/manageUsersButton"
             android:layout_width="match_parent"

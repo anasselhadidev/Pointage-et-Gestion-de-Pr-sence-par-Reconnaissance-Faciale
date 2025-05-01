@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter un terminal"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etTerminalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom du terminal (ex: A101)"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etTerminalLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Emplacement (ex: Bâtiment A, 1er étage)"
+        android:inputType="text"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type de terminal"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinnerTerminalType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/terminal_types"
+        android:layout_marginBottom="8dp" />
+
+</LinearLayout>
