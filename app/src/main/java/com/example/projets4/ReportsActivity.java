@@ -2,6 +2,8 @@ package com.example.projets4;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -174,11 +176,11 @@ public class ReportsActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
-                        tvNoReports.setVisibility(android.view.View.VISIBLE);
-                        recyclerReports.setVisibility(android.view.View.GONE);
+                        tvNoReports.setVisibility(View.VISIBLE);
+                        recyclerReports.setVisibility(View.GONE);
                     } else {
-                        tvNoReports.setVisibility(android.view.View.GONE);
-                        recyclerReports.setVisibility(android.view.View.VISIBLE);
+                        tvNoReports.setVisibility(View.GONE);
+                        recyclerReports.setVisibility(View.VISIBLE);
 
                         List<InstitutionalReport> reports = new ArrayList<>();
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
@@ -301,13 +303,16 @@ public class ReportsActivity extends AppCompatActivity {
                 .addOnSuccessListener(filieresSnapshot -> {
                     Map<String, Object> statsByFiliere = new HashMap<>();
 
+                    // Initialiser la variable filieresCount avec le nombre total de filières
+                    int filieresCount = filieresSnapshot.size();
+
                     // Pour chaque filière, collecter les statistiques
                     for (QueryDocumentSnapshot filiereDoc : filieresSnapshot) {
                         String filiereId = filiereDoc.getId();
                         String filiereName = filiereDoc.getString("nom");
 
-                        // Collect des données pour cette filière
-                        collectFiliereData(filiereId, filiereName, statsByFiliere, reportData);
+                        // Passer filieresCount à collectFiliereData
+                        collectFiliereData(filiereId, filiereName, statsByFiliere, reportData, filieresCount);
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -317,7 +322,7 @@ public class ReportsActivity extends AppCompatActivity {
                 });
     }
 
-    private void collectFiliereData(String filiereId, String filiereName, Map<String, Object> statsByFiliere, Map<String, Object> reportData) {
+    private void collectFiliereData(String filiereId, String filiereName, Map<String, Object> statsByFiliere, Map<String, Object> reportData,  int filieresCount) {
         // Requête pour obtenir les pointages pour les étudiants de cette filière
         db.collection("etudiants")
                 .whereEqualTo("filiereId", filiereId)
@@ -327,6 +332,7 @@ public class ReportsActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot etudiantDoc : etudiantsSnapshot) {
                         etudiantEmails.add(etudiantDoc.getId());
                     }
+
 
                     if (etudiantEmails.isEmpty()) {
                         Map<String, Object> filiereStats = new HashMap<>();

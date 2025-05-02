@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Types d'événements du calendrier académique -->
     <string-array name="event_types">
-        <item>Semestre</item>
         <item>Examen</item>
+        <item>Cours</item>
         <item>Vacances</item>
-        <item>Jour férié</item>
-        <item>Session de rattrapage</item>
-        <item>Événement spécial</item>
         <item>Autre</item>
     </string-array>
 
-    <!-- Catégories de tickets de support -->
+    <string-array name="terminal_types">
+        <item>Point d\'accès IoT</item>
+        <item>Terminal fixe</item>
+        <item>Terminal mobile</item>
+        <item>Autre</item>
+    </string-array>
+
     <string-array name="ticket_categories">
-        <item>Problème technique</item>
-        <item>Configuration système</item>
-        <item>Gestion des utilisateurs</item>
-        <item>Gestion des terminaux</item>
-        <item>Rapports et statistiques</item>
-        <item>Demande de formation</item>
+        <item>Point d\'accès IoT</item>
+        <item>Terminal fixe</item>
+        <item>Terminal mobile</item>
         <item>Autre</item>
     </string-array>
 </resources>
