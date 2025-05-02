@@ -240,7 +240,7 @@ public class AuthentificationActivity extends AppCompatActivity implements View.
     }
 
     private void navigateToProfesseurDashboard() {
-        Intent intent = new Intent(this, TeacherHomeActivity.class);
+        Intent intent = new Intent(this, TeacherDashboardActivity.class);
         startActivity(intent);
         finish();
     }

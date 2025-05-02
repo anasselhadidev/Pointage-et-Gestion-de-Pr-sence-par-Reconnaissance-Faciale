@@ -139,8 +139,6 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         // Récupérer les statistiques de chaque cours
-                        Long studentCount = doc.getLong("nombreEtudiants");
-                        Long presentCount = doc.getLong("nombrePresents");
 
                         if (studentCount != null) totalStudents += studentCount.intValue();
                         if (presentCount != null) totalPresent += presentCount.intValue();
@@ -187,8 +185,6 @@ public class TeacherDashboardActivity extends AppCompatActivity {
                         String room = "📍 Salle " + salle;
 
                         // Récupération du taux de présence si la séance est en cours ou terminée
-                        Long nombreEtudiants = doc.getLong("nombreEtudiants");
-                        Long nombrePresents = doc.getLong("nombrePresents");
                         int progress = 0;
                         String status = "À venir";
 
